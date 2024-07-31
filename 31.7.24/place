@@ -1,0 +1,161 @@
+Low Level
+1.Function show_employee():
+
+def show_employee(name, salary=9000):
+    print(f"Employee: {name}, Salary: {salary}")
+
+show_employee("John", 5000)  # Output: Employee: John, Salary: 5000
+show_employee("Doe")  # Output: Employee: Doe, Salary: 9000
+
+
+2.Function func1():
+def func1(*args):
+    for arg in args:
+        print(arg)
+
+func1(1, 2, 3)  # Output: 1 2 3
+func1("a", "b", "c")  # Output: a b c
+
+
+3.Function to take name and age and print their values:
+
+def print_name_age(name, age):
+    print(f"Name: {name}, Age: {age}")
+
+print_name_age("Alice", 30)  # Output: Name: Alice, Age: 30
+
+
+4.Function to return a list with distinct elements:
+
+def unique_list(lst):
+    return list(set(lst))
+
+sample_list = [1, 2, 3, 3, 3, 3, 4, 5]
+print(unique_list(sample_list))  # Output: [1, 2, 3, 4, 5]
+
+
+Medium Level
+1.Function power():
+def power(base, exp=2):
+    return base ** exp
+
+print(power(3, 3))  # Output: 27
+print(power(4))  # Output: 16
+
+2.Function reverse_list():
+def reverse_list(lst):
+    return lst[::-1]
+
+print(reverse_list([1, 2, 3, 4]))  # Output: [4, 3, 2, 1]
+3.Function compute():
+
+def compute(a, b):
+    return a + b, a - b, a * b, a / b
+
+print(compute(10, 5))  # Output: (15, 5, 50, 2.0)
+
+
+4.Function student_info():
+
+def student_info(name, **kwargs):
+    info = f"Student Name: {name}"
+    for key, value in kwargs.items():
+        info += f", {key.capitalize()}: {value}"
+    print(info)
+
+student_info("John", age=15, grade='10th', school='High School')
+# Output: Student Name: John, Age: 15, Grade: 10th, School: High School
+
+5.Generator function for prime numbers:
+
+def prime_generator(limit):
+    def is_prime(n):
+        if n < 2:
+            return False
+        for i in range(2, int(n ** 0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+    
+    num = 2
+    while num <= limit:
+        if is_prime(num):
+            yield num
+        num += 1
+
+for prime in prime_generator(20):
+    print(prime)  # Output: 2 3 5 7 11 13 17 19
+
+6.Higher-order function:
+
+def apply_function(func, values):
+    return [func(value) for value in values]
+
+print(apply_function(lambda x: x * 2, [1, 2, 3, 4]))  # Output: [2, 4, 6, 8]
+
+
+7.Generator function for Fibonacci numbers:
+
+def fibonacci_generator():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+
+fib = fibonacci_generator()
+for _ in range(10):
+    print(next(fib))  # Output: 0 1 1 2 3 5 8 13 21 34
+
+8.Recursive function for factorial:
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+print(factorial(5))  # Output: 120
+
+
+High Level
+1.Recursive function count_departments():
+
+def count_departments(department_dict):
+    count = 0
+    for sub_department in department_dict.values():
+        count += 1
+        if isinstance(sub_department, dict):
+            count += count_departments(sub_department)
+    return count
+
+org_chart = {
+    'HR': {},
+    'IT': {
+        'Development': {},
+        'QA': {}
+    },
+    'Finance': {
+        'Accounting': {},
+        'Payroll': {}
+    }
+}
+print(count_departments(org_chart))  # Output: 6
+
+
+2.Function to print Pascal's triangle:
+
+def print_pascals_triangle(n):
+    def generate_next_row(current_row):
+        return [1] + [current_row[i] + current_row[i + 1] for i in range(len(current_row) - 1)] + [1]
+
+    current_row = [1]
+    for _ in range(n):
+        print(current_row)
+        current_row = generate_next_row(current_row)
+
+print_pascals_triangle(5)
+# Output:
+# [1]
+# [1, 1]
+# [1, 2, 1]
+# [1, 3, 3, 1]
+# [1, 4, 6, 4, 1]
